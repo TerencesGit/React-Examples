@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React Example</title>
+</head>
+<body>
+	<div id="component"></div>
+	<script src="../build/react.js"></script>
+  <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+  <script type="text/babel">
+  	var HelloMessage = React.createClass({
+			render: function(){
+			return <h1>React {this.props.name}</h1>;
+			}
+		})
+		ReactDOM.render(
+		<HelloMessage name="Component" />,
+		document.getElementById('component')
+		)
+  </script>
+</body>
+</html>
