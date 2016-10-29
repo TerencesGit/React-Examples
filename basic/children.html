@@ -5,31 +5,31 @@
 	<title>React Example</title>
 </head>
 <body>
-	<div id="example"></div>
+	<div id="listCompenent"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
-  	var Notelist = React.createClass({
-	  	render: function(){
-	  		return (
-				<ol>
-					{
-						React.Children.map(this.props.children, function(child){
-							return <li>{child}</li>
-						})
-					}
-				</ol>
-	  		)
-	  	}
+  	var ListComponent = React.createClass({
+  		render: function(){
+  			return (
+					<ul>
+						{
+							React.Children.map(this.props.children,function(child){
+					 			return <li>{child}</li>
+					 		})
+						}
+					</ul>
+  			)
+  		}
   	})
   	ReactDOM.render(
-			<Notelist>
-				<span>children-1</span>
-				<span>children-2</span>
-				<span>children-3</span>
-			</Notelist>,
-			document.getElementById('example')
+			<ListComponent>
+				<h1>React</h1>
+				<h2>ReactNative</h2>
+				<a href="facebook.github.io/react">facebook.github.io/react</a>
+			</ListComponent>,
+			document.getElementById('listCompenent')
   	)
   </script>
 </body>
