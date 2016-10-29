@@ -3,6 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>React Example</title>
+	<style>
+		.content{
+			font-size: 18px;
+			color: #666;
+		}
+	</style>
 </head>
 <body>
 	<div id="component"></div>
@@ -10,13 +16,21 @@
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
+  var divStyle = {
+  	margin: "0 auto"
+  }
   	var HelloMessage = React.createClass({
 			render: function(){
-			return <h1>React {this.props.name}</h1>;
+				return (
+					<div style={divStyle}>
+						<h1 style={{color:"#f60"}}>{this.props.title}</h1>
+						<p className="content">{this.props.content}</p>
+					</div>
+				)
 			}
 		})
 		ReactDOM.render(
-		<HelloMessage name="Component" />,
+		<HelloMessage title="React" content="Welcome to the React community."/>,
 		document.getElementById('component')
 		)
   </script>
