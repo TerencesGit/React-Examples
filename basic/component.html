@@ -12,7 +12,8 @@
 </head>
 <body>
 	<div id="component"></div>
-	<div id="components"></div>
+	<div id="linkComponent"></div>
+	<div id="link"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
@@ -45,21 +46,30 @@
 				return <a href={this.props.link}>{this.props.link}</a>
 			}
 		});
-		var webname = 'React';
-		var weblink = 'http://facebook.github.io/react/';
 		var WebConponent = React.createClass({
 			render: function(){
 				return (
 					<div>
-						<WebName name = {webname}/>
-						<WebLink link = {weblink}/>
+						<WebName name = {this.props.wname}/>
+						<WebLink link = {this.props.wlink}/>
 					</div>
 				)
 			}
 		});
+		var wname = 'ReactComponents';
+		var wlink = 'http://facebook.github.io/react/';
 		ReactDOM.render(
-			<WebConponent />,
-			document.getElementById('components')
+			<WebConponent wname={wname} wlink={wlink}/>,
+			document.getElementById('linkComponent')
+		)
+		var Link = React.createClass({
+			render: function(){
+				return <a {...this.props}>{this.props.name}</a>
+			}
+		})
+		ReactDOM.render(
+			<Link href={wlink} name={wname} />,
+			document.getElementById('link')
 		)
   </script>
 </body>
