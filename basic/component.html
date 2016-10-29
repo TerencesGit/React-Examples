@@ -12,13 +12,14 @@
 </head>
 <body>
 	<div id="component"></div>
+	<div id="components"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
-  var divStyle = {
-  	margin: "0 auto"
-  }
+	  var divStyle = {
+	  	margin: "0 auto"
+	  }
   	var HelloMessage = React.createClass({
 			render: function(){
 				return (
@@ -32,6 +33,33 @@
 		ReactDOM.render(
 		<HelloMessage title="React" content="Welcome to the React community."/>,
 		document.getElementById('component')
+		)
+	 	
+		var WebName = React.createClass({
+			render: function(){
+				return <h1>{this.props.name}</h1>
+			}
+		})
+		var WebLink = React.createClass({
+			render: function(){
+				return <a href={this.props.link}>{this.props.link}</a>
+			}
+		});
+		var webname = 'React';
+		var weblink = 'http://facebook.github.io/react/';
+		var WebConponent = React.createClass({
+			render: function(){
+				return (
+					<div>
+						<WebName name = {webname}/>
+						<WebLink link = {weblink}/>
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<WebConponent />,
+			document.getElementById('components')
 		)
   </script>
 </body>
