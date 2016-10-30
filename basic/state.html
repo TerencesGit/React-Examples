@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div id="example"></div>
+	<div id="checkboxComponent"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
@@ -29,6 +30,30 @@
   	ReactDOM.render(
 			<LikeButton />,
 			document.getElementById('example')
+  	)
+  	var CheckButton = React.createClass({
+  		getInitialState: function(){
+  			return {
+  				checked: false
+  			}	
+  		},
+  		handleClick: function(){
+				this.setState({
+					checked: !this.state.checked
+				})
+  		},
+			render: function(){
+  			var text = this.state.checked ? '已' : '未';
+  			return(
+  				<label>
+							<input type="checkbox" onChange = {this.handleClick} />{text}选中  					
+  				</label>
+  			);
+			}
+  	})
+  	ReactDOM.render(
+			<CheckButton />,
+			document.getElementById('checkboxComponent')
   	)
   </script>
 </body>
