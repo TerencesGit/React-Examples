@@ -5,7 +5,8 @@
 	<title>React Example</title>
 </head>
 <body>
-	<div id="example"></div>
+  <div id="example"></div>
+	<div id="container"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
@@ -28,16 +29,70 @@
   		},
   		render: function(){
   			return (
-					<div style={{opacity: this.state.opacity}}>
-						Hello {this.props.name}
-					</div>
+					<h1 style={{opacity: this.state.opacity}}>
+						React {this.props.name}
+					</h1>
   			)
   		}
   	})
   	ReactDOM.render(
-			<Hello name="World" />,
+			<Hello name="Lifecycle" />,
 			document.getElementById('example')
   	)
+    //组件生命周期
+    var LifeComponent = React.createClass({
+      //一、创建阶段
+      getDefaultProps: function(){
+        console.log("getDefaultProps")
+        return {}
+      },
+      // 二、实例化阶段
+      getInitialState: function(){
+        console.log("getInitialState")
+        return null;
+      },
+      componentWillMount: function(){
+        console.log("componentWillMount")
+      },
+      render: function(){
+        console.log("render")
+        return <h1>lifeCycleExample</h1>
+      },
+      componentDidMount: function(){
+        console.log("componentDidMount")
+      },
+      //三、更新阶段
+      componentWillReceiveProps: function(){
+        console.log("componentWillReceiveProps")
+      },
+      shouldComponentUpdate: function(){
+        console.log("shouldComponentUpdate")
+        return false;
+      },
+      componentWillUpdate: function(){
+        console.log("componentWillUpdate")
+      },
+      //再次调用render方法 
+      componentDidUpdate: function(){
+        console.log("componentDidUpdate")
+      },
+      //四、移除阶段
+      componentWillUnmount: function(){
+        console.log("componentWillUnmount")
+      }
+    })
+    //第一次创建并渲染
+    ReactDOM.render(
+      <LifeComponent />,
+      document.getElementById('container')
+    )
+    //重新渲染
+    ReactDOM.render(
+      <LifeComponent />,
+      document.getElementById('container')
+    )
+    //移除组件
+    ReactDOM.unmountComponentAtNode(document.getElementById('container'))
   </script>
 </body>
 </html>

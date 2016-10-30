@@ -3,16 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>React Example</title>
+  <style>
+    .form{
+      width: 400px;
+      margin: 50px auto;
+    }
+  </style>
 </head>
 <body>
-	<div id="example"></div>
+	<div id="formComponent"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
-  	var Form = React.createClass({
+  	var FormComponent = React.createClass({
   		getInitialState: function(){
-  			return {value: 'hello'}
+  			return {value: 'user'}
   		},
   		handleChange: function(event){
   			this.setState({value: event.target.value})
@@ -20,17 +26,19 @@
   		render: function(){
   			var value = this.state.value;
   			return (
-  				<div>
+  				<form className="form">
+            <h2>表单组件</h2>
+            <label>用户名：</label>
   					<input type="text" value={value} 
   					onChange={this.handleChange} />
-  					<p>{value}</p>
-  				</div>
+  					<p>你输入的用户名是：{value}</p>
+  				</form>
   			)
   		}
   	})
   	ReactDOM.render(
-	  	<Form />,
-	  	document.getElementById('example')
+	  	<FormComponent />,
+	  	document.getElementById('formComponent')
   	)
   </script>
 </body>
