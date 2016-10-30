@@ -5,23 +5,27 @@
 	<title>React Example</title>
 </head>
 <body>
-	<div id="title"></div>
+	<div id="container"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
-  	var data = '标题组件';
-  	var Title = React.createClass({
+  	var TitleConponent = React.createClass({
   		propTypes: {
-  		title: React.PropTypes.string.required
+  		  title: React.PropTypes.string.required
   		},
+      getDefaultProps: function(){
+        return {
+          title: '标题'
+        }
+      },
 			render: function(){
 				return <h1>{this.props.title}</h1>
 			}
   	})
   	ReactDOM.render(
-			<Title title= {data} />,
-			document.getElementById('title')
+			<TitleConponent />,
+			document.getElementById('container')
   	)
   </script>
 </body>
