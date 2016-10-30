@@ -11,29 +11,47 @@
 	</style>
 </head>
 <body>
-	<div id="component"></div>
+	<div id="container"></div>
 	<div id="linkComponent"></div>
 	<div id="link"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
   <script type="text/babel">
-	  var divStyle = {
-	  	margin: "0 auto"
-	  }
-  	var HelloMessage = React.createClass({
+  	var MessageBox = React.createClass({
+			render: function(){
+				var messageBox = [];
+				for(var i = 0; i<5;i++){
+					messageBox.push(<SubMessage/>)
+				}
+				return (
+					<div>
+						<h1 style={{color:"#f60"}}>{this.props.title}</h1>
+						{messageBox}
+					</div>
+				)
+			}
+		});
+		var SubMessage = React.createClass({
 			render: function(){
 				return (
-					<div style={divStyle}>
-						<h1 style={{color:"#f60"}}>{this.props.title}</h1>
-						<p className="content">{this.props.content}</p>
+					<div>
+						<p className="content">Welcome to the React community.</p>
+						<TextBox />
 					</div>
+				)
+			}
+		}) 
+		var TextBox = React.createClass({
+			render: function(){
+				return (
+					<span>http://facebook.github.io/react/</span>
 				)
 			}
 		})
 		ReactDOM.render(
-		<HelloMessage title="React" content="Welcome to the React community."/>,
-		document.getElementById('component')
+			<MessageBox title="Hello React"/>,
+			document.getElementById('container')
 		)
 	 	
 		var WebName = React.createClass({
