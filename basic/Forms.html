@@ -5,7 +5,7 @@
 	<title>React Example</title>
   <style>
     .form{
-      width: 400px;
+      width: 600px;
       margin: 50px auto;
     }
   </style>
@@ -18,20 +18,51 @@
   <script type="text/babel">
   	var FormComponent = React.createClass({
   		getInitialState: function(){
-  			return {value: 'user'}
+  			return {
+          inputValue: 'user',
+          radiovalue: 'A',
+          checkValue: 'B',
+          selectValue: 'C'
+        }
   		},
-  		handleChange: function(event){
-  			this.setState({value: event.target.value})
+  		handleInput: function(e){
+  			this.setState({
+          inputValue: e.target.value
+        })
   		},
+      handleSelect: function(e){
+        this.setState({
+          selectValue: e.target.value
+        })
+      }, 
+      handleSubmit: function(e){
+        e.preventDefault();
+        console.log(e)
+      }, 
   		render: function(){
   			var value = this.state.value;
   			return (
-  				<form className="form">
-            <h2>表单组件</h2>
+  				<form className="form" onSubmit={this.handleSubmit}>
+            <h2>表单事件</h2>
             <label>用户名：</label>
-  					<input type="text" value={value} 
-  					onChange={this.handleChange} />
-  					<p>你输入的用户名是：{value}</p>
+  					<input type="text" value={this.state.inputValue} 
+  					onChange={this.handleInput} />
+  					<span>{this.state.inputValue}</span><br/>
+            <label>单选框</label>
+            <input type="radio" name="Radio" value="1"/>A
+            <input type="radio" name="Radio" defaultChecked value="2"/>B
+            <input type="radio" name="Radio" value="3"/>C 
+            <br/>
+            <label>复选框</label>
+            <input type="checkbox" name="check" checked value="1"/>AA
+            <input type="checkbox" name="check" value="21" />BB
+            <input type="checkbox" name="check" value="1" />CC <br/>
+            <select value={this.state.selectValue} onChange={this.handleSelect}>
+              <option value="A">option1</option>
+              <option value="B">option2</option>
+              <option value="C">option3</option>
+            </select><br/>
+            <button type="submit">提交</button>
   				</form>
   			)
   		}

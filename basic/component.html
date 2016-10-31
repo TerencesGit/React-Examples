@@ -21,8 +21,8 @@
   	var MessageBox = React.createClass({
 			render: function(){
 				var messageBox = [];
-				for(var i = 0; i<5;i++){
-					messageBox.push(<SubMessage/>)
+				for(var i = 0; i < 5; i++){
+					messageBox.push(<SubMessage key={'submessage'+i} />)
 				}
 				return (
 					<div>

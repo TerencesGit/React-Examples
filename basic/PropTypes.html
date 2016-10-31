@@ -16,13 +16,46 @@
   		},
       getDefaultProps: function(){
         return {
-          title: '标题'
+          title: '主标题'
+        }
+      },
+      getInitialState: function(){
+        return {
+          messages: ['子标题1','子标题2', '子标题3']
         }
       },
 			render: function(){
-				return <h1>{this.props.title}</h1>
+        return(
+          <div>
+            <h1>{this.props.title}</h1>
+            <SubTitle messages = {this.state.messages} />
+          </div>
+        )
 			}
-  	})
+  	});
+    var SubTitle = React.createClass({
+      propTypes: function(){
+        return {
+          messages: React.PropTypes.array.required
+        }
+      },
+      getDefaultProps: function(){
+        return {
+          messages: ['默认子标题']
+        }
+      },
+      render: function(){
+        var msgs = [];
+        this.props.messages.forEach(function(msg, index){
+          msgs.push(
+            <h2 key={index}>{msg}</h2>
+          )
+        })
+        return (
+          <div>{msgs}</div>
+        )
+      }
+    })
   	ReactDOM.render(
 			<TitleConponent />,
 			document.getElementById('container')

@@ -5,8 +5,9 @@
 	<title>React Example</title>
 </head>
 <body>
-	<div id="example"></div>
+	<div id="linkComponent"></div>
 	<div id="checkboxComponent"></div>
+	<div id="clickComponent"></div>
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
@@ -29,7 +30,7 @@
   	})
   	ReactDOM.render(
 			<LikeButton />,
-			document.getElementById('example')
+			document.getElementById('linkComponent')
   	)
   	var CheckButton = React.createClass({
   		getInitialState: function(){
@@ -54,6 +55,32 @@
   	ReactDOM.render(
 			<CheckButton />,
 			document.getElementById('checkboxComponent')
+  	)
+  	var ClickComponent = React.createClass({
+  		getInitialState: function(){
+  			return{
+  				clickCount: 0
+  			}
+  		},
+  		handleClick: function(){
+  			this.setState({
+  				clickCount: this.state.clickCount + 1
+  			}) 
+  		},
+  		render: function(){
+  			return (
+					<div>
+						<h2>点击下面按钮</h2>
+						<button onClick={this.handleClick}>点击我</button>
+						<p>你一共点击了{this.state.clickCount}次</p>
+					</div>
+  			)
+  		}
+  	})
+  	ReactDOM.render(
+			<ClickComponent />,
+			document.getElementById('clickComponent')
+			//console.log('success')
   	)
   </script>
 </body>
