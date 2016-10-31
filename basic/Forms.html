@@ -15,14 +15,17 @@
 	<script src="../build/react.js"></script>
   <script src="../build/react-dom.js"></script>
   <script src="../build/browser.min.js"></script>
+ <!--  <script src="../build/react.js"></script>
+  <script src="../build/JSXTransformer.js"></script> -->
   <script type="text/babel">
   	var FormComponent = React.createClass({
   		getInitialState: function(){
   			return {
           inputValue: 'user',
-          radiovalue: 'A',
-          checkValue: 'B',
-          selectValue: 'C'
+          radioValue: 'B',
+          checkValues: [],
+          selectValue: 'C',
+          textareaValue: 'textarea.....'
         }
   		},
   		handleInput: function(e){
@@ -30,43 +33,88 @@
           inputValue: e.target.value
         })
   		},
-      handleSelect: function(e){
+      handleRadio: function(e){
         this.setState({
-          selectValue: e.target.value
+          radioValue: e.target.value
+        })
+      },
+      handleCheck: function(e){
+        var checkValues = this.state.checkValues.slice();
+        var newVal =e.target.value;
+        var index = checkValues.indexOf(newVal);
+        if(index == -1){
+          checkValues.push(newVal)
+        }else{
+          checkValues.slice(index,1)
+        }   
+        this.setState({
+          checkValues: checkValues
         })
       }, 
       handleSubmit: function(e){
         e.preventDefault();
-        console.log(e)
+        var formData = {
+          input: this.refs.inputText.value,
+          radio: this.state.radioValue,
+          check: this.state.checkValues,
+          select: this.refs.select.value,
+          textare: this.refs.textarea.value
+        }
+        console.log(formData)
+        this.refs.Radio.saySomething()
       }, 
   		render: function(){
-  			var value = this.state.value;
   			return (
   				<form className="form" onSubmit={this.handleSubmit}>
             <h2>表单事件</h2>
-            <label>用户名：</label>
-  					<input type="text" value={this.state.inputValue} 
-  					onChange={this.handleInput} />
+            <label>输入框</label><br/>
+  					<input type="text" ref="inputText" defaultValue={this.state.inputValue} />
   					<span>{this.state.inputValue}</span><br/>
-            <label>单选框</label>
-            <input type="radio" name="Radio" value="1"/>A
-            <input type="radio" name="Radio" defaultChecked value="2"/>B
-            <input type="radio" name="Radio" value="3"/>C 
+            <label>单选框</label><br/>
+            <RadioButtons ref="Radio" handleRadio={this.handleRadio}/>
             <br/>
             <label>复选框</label>
-            <input type="checkbox" name="check" checked value="1"/>AA
-            <input type="checkbox" name="check" value="21" />BB
-            <input type="checkbox" name="check" value="1" />CC <br/>
-            <select value={this.state.selectValue} onChange={this.handleSelect}>
+            <CheckButtons handleCheck={this.handleCheck}/>
+            <br/>
+            <label>下拉框</label><br/>
+            <select defaultValue={this.state.selectValue} ref="select">
               <option value="A">option1</option>
               <option value="B">option2</option>
               <option value="C">option3</option>
             </select><br/>
+            <label>多行文本框</label><br/>
+            <textarea ref="textarea" defaultValue={this.state.textareaValue}></textarea>
+            <br/>
             <button type="submit">提交</button>
   				</form>
   			)
   		}
   	})
+    var RadioButtons = React.createClass({
+      saySomething: function(){
+        alert("hello react!")
+      },
+      render: function(){
+        return (
+          <span>
+            <input onChange={this.props.handleRadio} type="radio" name="Radio" value="A"/>A
+            <input onChange={this.props.handleRadio} type="radio" name="Radio" defaultChecked value="B"/>B
+            <input onChange={this.props.handleRadio} type="radio" name="Radio" value="Click"/>C 
+          </span>
+        )
+      }
+    })
+    var CheckButtons = React.createClass({
+      render: function(){
+       return (
+        <span>
+          <input onChange={this.props.handleCheck} type="checkbox" name="check" value="A"/>AA
+          <input onChange={this.props.handleCheck} type="checkbox" name="check" value="B" />BB
+          <input onChange={this.props.handleCheck} type="checkbox" name="check" value="C" />CC 
+        </span>
+      )
+      }
+    })
   	ReactDOM.render(
 	  	<FormComponent />,
 	  	document.getElementById('formComponent')
