@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="container"></div>
+	<script src="../build/react-with-addons-0.13.1.js"></script>
+  <script src="../build/JSXTransformer.js"></script>
+  <script type="text/jsx">
+		var EasyForm = React.createClass({
+			mixins: [React.addons.LinkedStateMixin],
+			getInitialState: function(){
+			 return {
+			 	message: 'react is awesome',
+			 	isAwesome: true
+			 }
+			},
+			render: function(){
+				return (
+					<div>
+						<h1>大家说：{this.state.message}</h1>
+						<h2>React是不是很好用 ? {this.state.isAwesome ? '非常好用' : '一般般'}</h2>
+						<input type="text" valueLink={this.linkState('message')}/>
+						<br/>
+						<input type="checkbox" checkedLink={this.linkState('isAwesome')} />
+						<SubComp messageLink={this.linkState('message')} checkLink={this.linkState('isAwesome')} />
+					</div>
+				)
+			}
+		});
+		var SubComp = React.createClass({
+			render: function(){
+				return (
+					<div>
+						<h3>这是一个子组件</h3>
+						<SubSubComp {...this.props} />
+					</div>
+				)
+			}
+		});
+		var SubSubComp = React.createClass({
+			render: function(){
+				return (
+					<div>
+						<p>你想说什么？</p>
+						<input type="text" valueLink={this.props.messageLink} />
+						<p>你喜欢react吗？</p>
+						<input type="checkbox" checkedLink={this.props.checkLink} />
+					</div>
+				)
+			}
+		});
+		React.render(
+			<EasyForm />,
+			document.getElementById('container')
+		)
+  </script>
+</body>
+</html>
