@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React Example</title>
+</head>
+<body>
+	<div id="container"></div>
+	<script src="../build/react.js"></script>
+  <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+  <script type="text/babel">
+    //定义Mixin
+  	var stateRecordMixin = {
+      componentWillMount: function(){
+        this.oldStates = [];
+      },
+      componentWillUpdate: function(nextProp, nextState){
+        this.oldStates.push(nextState)
+      },
+      previousState: function(){
+        var index = this.oldStates.length - 1;
+        return index == -1 ? {} : this.oldStates[index];
+      }
+    }
+    var MessageBox = React.createClass({
+      mixins: [stateRecordMixin],
+      getInitialState: function(){
+        return {
+          count: 0
+        }
+      },
+      doUpdate: function(){
+        this.setState({
+          count: this.state.count + 1
+        })
+        console.log('上一次计数是：'+this.previousState().count)
+      },
+      render: function(){
+        return (
+          <div>
+            <h1>计数：{this.state.count}</h1>
+            <button onClick={this.doUpdate}>更新组件</button>
+            <SubComp count={this.state.count} />
+          </div>
+        )
+      }
+    });
+    var SubComp = React.createClass({
+      mixins: [stateRecordMixin],
+      getInitialState: function(){
+        return{
+            count: 0
+        }
+      },
+      componentWillReceiveProps: function(nextProp){
+        this.setState({
+          count: this.props.count * 2
+        })
+        console.log('子组件上一次计数：'+this.previousState().count)
+      },
+      render: function(){
+        return (
+          <p>子组件计数*2：{this.state.count}</p>
+        )
+      }
+    });
+    ReactDOM.render(
+      <MessageBox />,
+      document.getElementById('container')
+    )
+  </script>
+</body>
+</html>
