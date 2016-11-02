@@ -5,16 +5,17 @@
 	<title>React Example</title>
 </head>
 <body>
-	<h1>Basic Example</h1>
+	<h1>Hello React</h1>
 	<div id="container">
-		<p>
+		<h3>
       To install React, follow the instructions on
-      <a href="https://github.com/facebook/react/">GitHub</a>.
-    </p>
+      <a href="https://github.com/facebook/react/">GitHub</a>
+    </h3>
 	</div>
-	<div id="hello"></div>
-	<div id="names"></div>
-	<div id="arr"></div>
+	<a href="./basic/Lifecycle.html" target="_blank">组件生命周期</a>
+	<a href="./basic/LinkedStateMixin.html" target="_blank">单向数据流</a>
+	<a href="./basic/Forms.html" target="_blank">Form</a>
+	<a href="./basic/mixin.html" target="_blank">Mixin</a>
 	<script src="./build/react.js"></script>
 	<script src="./build/react-dom.js"></script>
 	<script src="./build/browser.min.js"></script>
@@ -35,36 +36,6 @@
 				document.getElementById('container')
 				)
 		}, 50)
-	</script>
-	<script type="text/babel">
-		ReactDOM.render(
-			<h1>hello world!</h1>,
-			document.getElementById('hello')
-		);
-
-		var names = ['Alice', 'Emily', 'Kate'];
-		ReactDOM.render(
-			<ul>
-			{
-				names.map(function(name){
-				return <li> Hello,{name}!</li>
-				})
-			}
-			</ul>,
-			document.getElementById('names')
-		)
-
-		var arr = [
-			<h3>Array-1</h3>,
-			<a>Array-2</a>,
-			<p>Array-3</p>
-		]
-		ReactDOM.render(
-			<div>
-				{arr}
-			</div>,
-			document.getElementById('arr')
-		)
 	</script>
 </body>
 </html>
