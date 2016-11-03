@@ -1,14 +1,23 @@
 var React = require('react');
 module.exports = React.createClass({
+	voteUp: function(){
+		var newCount = parseInt(this.props.voteCount, 10) + 1;
+		this.props.onVote(this.props.questionKey, newCount)
+	},
+	voteDown: function(){
+		var newCount = parseInt(this.props.voteCount, 10) - 1;
+		newCount <= 0 ? newCount = 0 : newCount
+		this.props.onVote(this.props.questionKey, newCount)
+	},
 	render: function(){
 		return (
 		  <div className="media" key={this.props.key}>
 	      <div className="media-left">
-	        <button className="btn btn-default">
+	        <button className="btn btn-default" onClick={this.voteUp}>
 	          <span className="glyphicon glyphicon-chevron-up"></span>
 	          <span className="vote-count">{this.props.voteCount}</span>
 	        </button>
-	        <button className="btn btn-default">
+	        <button className="btn btn-default" onClick={this.voteDown}>
 	          <span className="glyphicon glyphicon-chevron-down"></span>
 	        </button>
 	      </div>

@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('lodash');
 var AddButton = require('./AddButton');
 var QuestionForm = require('./QuestionForm');
 var QuestionList = require('./QuestionList');
@@ -19,8 +20,39 @@ module.exports = React.createClass({
 			},
 		];
 		return {
-			questions: questions
+			questions: questions,
+			formDisplayed: false
 		}
+	},
+	onToggleForm: function(){
+		this.setState({
+			formDisplayed: !this.state.formDisplayed
+		})
+	},
+	onNewQuestion: function(newQuestion){
+		newQuestion.key = this.state.questions.length + 1;
+		var newQuestions = this.state.questions.concat(newQuestion);
+		newQuestions =  this.sortQuestion(newQuestions)
+		this.setState({
+			questions: newQuestions
+		})
+	},
+	sortQuestion: function(questions){
+		questions.sort(function(a, b){
+			return b.voteCount - a.voteCount
+		})
+		return questions
+	},
+	onVote: function(key, newCount){
+		var questions = _.uniq(this.state.questions);
+		var index = _.findIndex( questions, function(qst){
+			return qst.key == key;
+		})
+		questions[index].voteCount = newCount;
+		questions = this.sortQuestion(questions)
+		this.setState({
+			questions: questions
+		})
 	},
 	render: function(){
 		return(
@@ -28,12 +60,14 @@ module.exports = React.createClass({
 				<div className="jumbotron text-center">
 	          <div className="container">
 	            <h1>React问答</h1>
-	            <AddButton />
+	            <AddButton onToggleForm={this.onToggleForm}/>
 	          </div>
 	      </div>
 	      <div className="main container">
-	       	<QuestionForm />
-	        <QuestionList questions={this.state.questions}/>
+	       	<QuestionForm onNewQuestion={this.onNewQuestion}
+			       	formDisplay={this.state.formDisplayed} 
+			       	onToggleForm={this.onToggleForm} />
+	        <QuestionList onVote={this.onVote} questions={this.state.questions} />
 	      </div>
 			</div>
 		)
