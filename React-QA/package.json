@@ -1,5 +1,5 @@
 {
-  "name": "react-project",
+  "name": "React-QA",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -15,6 +15,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "reactify": "^1.1.1",
+    "stream-consume": "^0.1.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }
