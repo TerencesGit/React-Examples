@@ -18,15 +18,15 @@ const TodoBox = React.createClass({
 	  	todolist: newTodoList
 	  })
 	},
-	todoCount(){ 
-		var todo = {
-			todoCount: this.state.todolist.length,
-			todoCountComp: this.state.todolist.filter(function(item){
-				return item.complete === true;
-			}).length, 
-		}
-		return todo;
-	},
+	// todoCount(){ 
+	// 	var todo = {
+	// 		todoCount: this.state.todolist.length,
+	// 		todoCountComp: this.state.todolist.filter(function(item){
+	// 			return item.complete === true;
+	// 		}).length, 
+	// 	}
+	// 	return todo;
+	// },
 	handleToggleDone(id){
 		var data = this.state.todolist;
 		for(var i in data){
@@ -40,7 +40,6 @@ const TodoBox = React.createClass({
 		})
 	},
 	removeTodo(id){
-		console.log(id)
 		var data = this.state.todolist;
 		// for(var i in data){
 		// 	if(data[i].id == id){
@@ -59,7 +58,6 @@ const TodoBox = React.createClass({
 	render(){
 		return(
 			<div className="main">
-				<h1 className="title">React-Todolist</h1>
 				<Todoform newTodoItem={this.addTodo} /> 
 				<Todolist todolist={this.state.todolist} 
 									todoCount={this.todoCount}
