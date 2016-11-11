@@ -12,7 +12,8 @@ export default class Todoform extends Component{
 											key = {item.id}	
 											task = {item.task}
 											done = {item.done}
-											toggleDone={this.props.toggleDone}/>
+											toggleDone={this.props.toggleDone}
+											removeTodo={this.props.removeTodo}/>
 		}.bind(this))	
 		return(
 			<div className="todolist">

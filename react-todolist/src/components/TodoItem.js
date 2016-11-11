@@ -3,6 +3,9 @@ const TodoItem = React.createClass({
 	toggleDone(){
 		this.props.toggleDone(this.props.id)
 	},
+	removeTodo(){
+		this.props.removeTodo(this.props.id)
+	},
 	render(){
 		return(
 				<li id={this.props.id}>
@@ -11,7 +14,7 @@ const TodoItem = React.createClass({
 									 onChange={this.toggleDone}/>
 						<span>{this.props.task}</span>
 					</label>
-					<a href="javascript:;">&times;</a> 
+					<a href="javascript:;" onClick={this.removeTodo}>&times;</a> 
 				</li>
 		)
 	}

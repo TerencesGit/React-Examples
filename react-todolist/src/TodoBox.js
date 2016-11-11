@@ -11,7 +11,7 @@ const TodoBox = React.createClass({
 			]
 		}
 	},
-	onNewTodo(newItem){
+	addTodo(newItem){
 		newItem.id = this.state.todolist.length + 1;
 	  var newTodoList = this.state.todolist.concat(newItem);
 	  this.setState({
@@ -28,7 +28,6 @@ const TodoBox = React.createClass({
 		return todo;
 	},
 	handleToggleDone(id){
-		console.log(id)
 		var data = this.state.todolist;
 		for(var i in data){
 			if(data[i].id == id){
@@ -40,14 +39,32 @@ const TodoBox = React.createClass({
 			todolist: data
 		})
 	},
+	removeTodo(id){
+		console.log(id)
+		var data = this.state.todolist;
+		// for(var i in data){
+		// 	if(data[i].id == id){
+		// 		console.log(data[i])
+		// 		data.splice(data[i],1);
+		// 		break;
+		// 	}
+		// }
+		data = data.filter(function(item){
+			return item.id !== id
+		})
+		this.setState({
+			todolist: data
+		})
+	},
 	render(){
 		return(
 			<div className="main">
 				<h1 className="title">React-Todolist</h1>
-				<Todoform newTodoItem={this.onNewTodo} /> 
+				<Todoform newTodoItem={this.addTodo} /> 
 				<Todolist todolist={this.state.todolist} 
 									todoCount={this.todoCount}
-									toggleDone={this.handleToggleDone}/> 
+									toggleDone={this.handleToggleDone}
+									removeTodo={this.removeTodo} /> 
 			</div>
 		)
 	}
