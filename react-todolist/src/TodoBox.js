@@ -55,6 +55,18 @@ const TodoBox = React.createClass({
 			todolist: data
 		})
 	},
+	updateTodo(task,id){
+		var data = this.state.todolist;
+		for(var i in data){
+			if(data[i].id == id){
+				data[i].task = task;
+				break;
+			}
+		}
+		this.setState({
+			todolist: data
+		})
+	},
 	render(){
 		return(
 			<div className="main">
@@ -62,7 +74,8 @@ const TodoBox = React.createClass({
 				<Todolist todolist={this.state.todolist} 
 									todoCount={this.todoCount}
 									toggleDone={this.handleToggleDone}
-									removeTodo={this.removeTodo} /> 
+									removeTodo={this.removeTodo} 
+									updateTodo={this.updateTodo}/> 
 			</div>
 		)
 	}

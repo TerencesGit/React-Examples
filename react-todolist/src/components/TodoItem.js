@@ -12,21 +12,26 @@ const TodoItem = React.createClass({
 		this.props.removeTodo(this.props.id)
 	},
 	editTodo(){
-		console.log(this.props.id)
 		this.setState({
 			editState : !this.state.editState
 		})
+		this.refs.inputText.focus();
 	},
 	handleUpdate(e){
-		console.log()
-		if(e && e.keyCode == 13){
+		var text = this.refs.inputText.value;
+		if(e.keyCode == 13){
+			if(text.trim()){
+				this.props.updateTodo(text,this.props.id)
+			}
 			this.setState({
 				editState : !this.state.editState
 			})
 		}
 	},
-	handelValue(){
-		console.log(123)
+	handleBlur(){
+		this.setState({
+			editState : false
+		})
 	},
 	render(){
 		var editStyle = {
@@ -43,11 +48,12 @@ const TodoItem = React.createClass({
 								onDoubleClick={this.editTodo}>
 							{this.props.task}
 					</span>
-					<input ref="inputText" defalutValue={this.props.task} 
+					<input ref="inputText" defaultValue={this.props.task} 
 												style={editStyle} 
 												className="editInput"
-												onKeyPress={this.handleUpdate} 															
-											  />
+												onKeyDown={this.handleUpdate} 															
+											  onBlur={this.handleBlur}
+											  autofocus/>
 					<a href="javascript:;" onClick={this.removeTodo}>&times;</a> 
 				</li>
 		)
