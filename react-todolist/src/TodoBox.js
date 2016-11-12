@@ -3,30 +3,27 @@ import Todolist from './components/Todolist';
 import Todoform from './components/Todoform';
 const TodoBox = React.createClass({
 	getInitialState() {
+		var data = JSON.parse(localStorage.getItem('react-todos'));
+		console.log(data)
 		return {
-			todolist: [
-				{"id": "1", "task":"吃饭", "done": false},
-        {"id": "2", "task":"睡觉", "done": false},
-        {"id": "3", "task":"打豆豆", "done": true},
-			]
+			tid: 1,
+			todolist: data || []
 		}
 	},
+	saveTodos(){
+		localStorage.setItem('react-todos',JSON.stringify(this.state.todolist))
+	},
 	addTodo(newItem){
-		newItem.id = this.state.todolist.length + 1;
+		this.setState({
+			tid: this.state.tid + 1
+		})
+		newItem.id = this.state.tid;
 	  var newTodoList = this.state.todolist.concat(newItem);
 	  this.setState({
 	  	todolist: newTodoList
-	  })
+	  });
+	  this.saveTodos()
 	},
-	// todoCount(){ 
-	// 	var todo = {
-	// 		todoCount: this.state.todolist.length,
-	// 		todoCountComp: this.state.todolist.filter(function(item){
-	// 			return item.complete === true;
-	// 		}).length, 
-	// 	}
-	// 	return todo;
-	// },
 	handleToggleDone(id){
 		var data = this.state.todolist;
 		for(var i in data){
@@ -38,6 +35,7 @@ const TodoBox = React.createClass({
 		this.setState({
 			todolist: data
 		})
+		this.saveTodos()
 	},
 	removeTodo(id){
 		var data = this.state.todolist;
@@ -54,6 +52,7 @@ const TodoBox = React.createClass({
 		this.setState({
 			todolist: data
 		})
+		this.saveTodos()
 	},
 	updateTodo(task,id){
 		var data = this.state.todolist;
@@ -66,6 +65,7 @@ const TodoBox = React.createClass({
 		this.setState({
 			todolist: data
 		})
+		this.saveTodos()
 	},
 	render(){
 		return(
