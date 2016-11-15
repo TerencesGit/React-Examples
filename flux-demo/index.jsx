@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import myButtonController from './components/myButtonController';
+import MyButtonController from './components/MyButtonController';
 render(
-	<myButtonController />,
+	<MyButtonController />,
 	document.getElementById('root')
 )
