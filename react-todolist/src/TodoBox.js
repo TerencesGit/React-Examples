@@ -6,7 +6,6 @@ const TodoBox = React.createClass({
 		var data = JSON.parse(localStorage.getItem('react-todos'));
 		console.log(data)
 		return {
-			tid: 1,
 			todolist: data || []
 		}
 	},
@@ -14,10 +13,7 @@ const TodoBox = React.createClass({
 		localStorage.setItem('react-todos',JSON.stringify(this.state.todolist))
 	},
 	addTodo(newItem){
-		this.setState({
-			tid: this.state.tid + 1
-		})
-		newItem.id = this.state.tid;
+		newItem.id = new Date().getTime();
 	  var newTodoList = this.state.todolist.concat(newItem);
 	  this.setState({
 	  	todolist: newTodoList
