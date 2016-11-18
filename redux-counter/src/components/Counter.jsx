@@ -11,6 +11,9 @@ const Counter = React.createClass({
 			this.props.onIncrement()
 		}
 	},
+	incrementAsync(){
+		setTimeout(this.props.onIncrement, 1000)
+	},
 	render(){
 		const { value, onIncrement, onDecrement, inCrementIfOdd} = this.props
 		return (
@@ -22,6 +25,8 @@ const Counter = React.createClass({
 				<button onClick={onDecrement}>minus</button>
 				{' '}
 				<button onClick={this.incrementIfOdd}>Increment if odd</button>
+				{' '}
+				<button onClick={this.incrementAsync}>Increment async</button>
 			</p>
 		)
 	}
