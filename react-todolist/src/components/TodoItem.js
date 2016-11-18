@@ -52,7 +52,8 @@ const TodoItem = React.createClass({
 												style={editStyle} 
 												className="editInput"
 												onKeyDown={this.handleUpdate} 															
-											  onBlur={this.handleBlur}/>
+											  onBlur={this.handleBlur} 
+											  autoFocus={true} />
 					<a href="javascript:;" onClick={this.removeTodo}>&times;</a> 
 				</li>
 		)
