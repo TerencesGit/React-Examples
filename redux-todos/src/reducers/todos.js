@@ -10,6 +10,11 @@ const todo = (state, action) => {
 			if (state.id !== action.id) {
 			 	return state
 			}
+			return {
+				id: state.id,
+				text: state.text,
+				completed: !state.completed
+			}
 		default:
 			return state
 	}
