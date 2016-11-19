@@ -1,7 +1,11 @@
-import React from 'react';
+import React from 'react'
+import AddTodo from '../containers/AddTodo'
+import VisibleTodoList from '../containers/VisibleTodoList'
+
 const App = () => (
-		<div>
-			<h1>hello redux</h1>
-		</div>
+	<div>
+		<AddTodo />
+		<VisibleTodoList />
+	</div>
 )
-export default App;
+export default App
